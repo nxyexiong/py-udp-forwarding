@@ -36,7 +36,7 @@ class Conn:
 
  def handle_recv(self):
   while self.running:
-   readable, _, _ = select.select([self.sock, ], [], [], 1)
+   readable, _, _ = select.select([self.sock, ], [], [], 0.001) # 1ms
    if not readable:
     continue
    data, addr = self.sock.recvfrom(2048)
@@ -72,7 +72,7 @@ class Server:
 
  def handle_recv(self):
   while self.running:
-   readable, _, _ = select.select([self.sock, ], [], [], 1)
+   readable, _, _ = select.select([self.sock, ], [], [], 0.001) # 1ms
    if not readable:
     continue
    data, addr = self.sock.recvfrom(2048)
